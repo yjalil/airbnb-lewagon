@@ -10,17 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.1].define(version: 2024_01_22_134349) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_22_142916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "jobs", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string "preview"
+    t.decimal "cost"
+    t.integer "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "description"
+  end
 
   create_table "reservations", force: :cascade do |t|
     t.string "status"
+    t.integer "hrayfi_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "job_id", null: false
+    t.index ["job_id"], name: "index_reservations_on_job_id"
+  end
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_22_122443) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  create_table "reviews", force: :cascade do |t|
+    t.integer "stars"
+    t.string "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "job_id", null: false
+    t.index ["job_id"], name: "index_reviews_on_job_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -34,18 +56,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_122443) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
-ActiveRecord::Schema[7.1].define(version: 2024_01_22_133205) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "jobs", force: :cascade do |t|
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.string "preview"
-    t.decimal "cost"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "jobs", "users", column: "client_id"
+  add_foreign_key "reservations", "jobs"
+  add_foreign_key "reservations", "users", column: "hrayfi_id"
+  add_foreign_key "reviews", "jobs"
 end

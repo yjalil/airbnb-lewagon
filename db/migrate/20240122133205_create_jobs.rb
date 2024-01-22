@@ -5,8 +5,10 @@ class CreateJobs < ActiveRecord::Migration[7.1]
       t.datetime :end_time
       t.string :preview
       t.decimal :cost
+      t.integer :client_id
 
       t.timestamps
     end
+    add_foreign_key :jobs, :users, column: :client_id
   end
 end

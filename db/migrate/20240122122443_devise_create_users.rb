@@ -33,7 +33,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       # t.datetime :locked_at
 
       t.string :user_name
-      t.integer :hour_rate
+      t.decimal :hour_rate
       t.timestamps null: false
     end
 

@@ -7,7 +7,15 @@ User.create!(
   user_name: "Rachid",
   email: "rachid111sabir@gmail.com",
   password: "123456",
-  hour_rate: 4.5
+  hour_rate: 4.5,
+  role: "hrayfi"
+)
+
+User.create!(
+  user_name: "Abdjallil",
+  email: "Abdjallil@gmail.com",
+  password: "123456",
+  role: "client"
 )
 
 Job.create!(

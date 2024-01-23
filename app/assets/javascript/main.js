@@ -5,10 +5,11 @@ Author: GrayGrids
 
 (function () {
     //===== Prealoder
+    console.log("file loaded");
 
-    window.onload = function () {
-        window.setTimeout(fadeout, 500);
-    }
+    setTimeout(() => {
+      let preloader =document.querySelector(".preloader").outerHTML = ""
+    }, (1000));
 
     function fadeout() {
         document.querySelector('.preloader').style.opacity = '0';
@@ -24,16 +25,17 @@ Author: GrayGrids
         var sticky = header_navbar.offsetTop;
 
         var logo = document.querySelector('.navbar-brand img')
-        if (window.pageYOffset > sticky) {
+        if (window.scrollY > sticky) {
           header_navbar.classList.add("sticky");
-          logo.src = 'assets/images/logo/logo.svg';
+          // logo.src = 'assets/images/logo/logo.svg';
         } else {
           header_navbar.classList.remove("sticky");
-          logo.src = 'assets/images/logo/white-logo.png';
+          // logo.src = 'assets/images/logo/white-logo.png';
         }
 
         // show or hide the back-top-top button
         var backToTo = document.querySelector(".scroll-top");
+
         if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
             backToTo.style.display = "flex";
         } else {

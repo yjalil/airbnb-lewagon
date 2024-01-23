@@ -22,14 +22,6 @@ Index Of css
 19. Footer CSS
 ========================== */
 
-@font-face {
-  src: url('../fonts/LineIcons.eot');
-  src: url('../fonts/LineIcons.eot') format('embedded-opentype'), url('../fonts/LineIcons.woff2') format('woff2'), url('../fonts/LineIcons.woff') format('woff'), url('../fonts/LineIcons.ttf') format('truetype'), url('../fonts/LineIcons.svg') format('svg');
-  font-family: 'LineIcons';
-  font-weight: normal;
-  font-style: normal;
-}
-
 @import "variables";
 
 @import "normalize";

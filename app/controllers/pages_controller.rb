@@ -10,4 +10,10 @@ class PagesController < ApplicationController
       @reservations = Reservation.where(client_id: current_user.id)
     end
   end
+  def about
+
+  end
+  def contact
+
+  end
 end

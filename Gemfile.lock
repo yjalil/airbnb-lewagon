@@ -85,6 +85,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
+    animate-css-rails (3.5.2)
     autoprefixer-rails (10.4.16.0)
       execjs (~> 2)
     base64 (0.2.0)
@@ -296,6 +297,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  animate-css-rails
   autoprefixer-rails
   bootsnap
   bootstrap (~> 5.2)

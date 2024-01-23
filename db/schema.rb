@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_160757) do
     t.datetime "end_time"
     t.string "preview"
     t.decimal "cost"
-    t.integer "client_id"
+    t.integer "hrayfi_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_160757) do
 
   create_table "reservations", force: :cascade do |t|
     t.string "status"
-    t.integer "hrayfi_id"
+    t.integer "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "job_id", null: false
@@ -59,8 +59,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_160757) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "jobs", "users", column: "client_id"
+  add_foreign_key "jobs", "users", column: "hrayfi_id"
   add_foreign_key "reservations", "jobs"
-  add_foreign_key "reservations", "users", column: "hrayfi_id"
+  add_foreign_key "reservations", "users", column: "client_id"
   add_foreign_key "reviews", "jobs"
 end

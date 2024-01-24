@@ -16,4 +16,8 @@ class PagesController < ApplicationController
   def contact
 
   end
+  def hrayfya
+    @hrayfya = User.where(role: "hrayfi")
+  end
+
 end

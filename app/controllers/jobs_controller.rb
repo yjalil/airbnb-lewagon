@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_hrayfi, only: [:details]
   def index
     if params[:query].present?
       @query = params[:query]
@@ -28,6 +28,10 @@ class JobsController < ApplicationController
   def show
   end
 
+  def details
+    @jobs = Job.where(hrayfi_id: @hrayfi.id)
+  end
+
   def edit
   end
 
@@ -49,6 +53,11 @@ class JobsController < ApplicationController
   def set_job
     @job = Job.find(params[:id])
   end
+
+  def set_hrayfi
+    @hrayfi = User.find(params[:id])
+  end
+
 
   def job_params
     params.require(:job).permit(:title, :start_time, :end_time, :preview)

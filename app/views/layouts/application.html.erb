@@ -9,14 +9,17 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "animate", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "tiny-slider", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "glightbox.min", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "login", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "main", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "bootstrap.min", "data-turbo-track": "reload" %>
+
     <%= javascript_importmap_tags %>
   </head>
 
@@ -66,7 +69,11 @@
                             <div class="button home-btn">
                               <% if current_user %>
                                 <a href=<%= dashboard_path %> class="btn">Welcome <%=current_user.user_name%></a>
-                                <a href=<%= destroy_user_session_path %> class="btn">Sign</a>
+
+                                <%= link_to destroy_user_session_path, data: { "turbo-method": :delete } do %>
+                                  <button class="btn">Sign out</button>
+                                <%end%>
+                                <%# <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
 
                               <% else %>
                                 <a href=<%= new_user_session_path %> class="btn">Try for free</a>

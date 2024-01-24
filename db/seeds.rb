@@ -19,7 +19,7 @@ User.create!(
 )
 
 Job.create!(
-  title: "Job Title",
+  title: "Painter",
   start_time: Time.now,
   end_time: Time.now,
   hrayfi_id: User.first.id,

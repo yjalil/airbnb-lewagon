@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
-  before_action :set_hrayfi, only: [:create, :details]
+  before_action :set_hrayfi, only: [ :details]
 
 
   def index
@@ -20,8 +20,15 @@ class JobsController < ApplicationController
 
   def create
     @job = Job.new(job_params)
-    new_job_values
-    if @job.save
+    user = User.find(params[:job][:hrayfi_id])
+    new_job_values(user)
+    @job.hrayfi_id = params[:job][:hrayfi_id]
+    @reservation = Reservation.new
+    @reservation.status = "Pending"
+    @reservation.client_id = current_user.id
+    if @job.save!
+      @reservation.job_id = @job.id
+      @reservation.save!
       redirect_to dashboard_path
     else
       render :new, status: :unprocessable_entity
@@ -65,13 +72,11 @@ class JobsController < ApplicationController
     @hrayfi = User.find(params[:id])
   end
 
-  def new_job_values
-    @job.cost = ((@job.end_time - @job.start_time)/1.hour).round * @hrayfi.hour_rate
+  def new_job_values(hrayfi)
+    @job.cost = ((@job.end_time - @job.start_time)/1.hour).round * hrayfi.hour_rate
   end
 
-
-
   def job_params
-    params.require(:job).permit(:title, :start_time, :end_time, :preview)
+    params.require(:job).permit(:title, :start_time, :end_time, :preview, :description, :hrayfi_id)
   end
 end

@@ -1,73 +1,72 @@
 <!-- Start Blog Grid Area -->
-<% @hrayfya.each do |item| %>
-    <section class="section blog-grid-page">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-12 col-12">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <!-- Start Single Blog Grid -->
-                            <div class="single-blog-grid">
-                                <div class="blog-img">
-                                    <a href="blog-single.html">
-                                        <img src="https://via.placeholder.com/500x310" alt="#">
-                                    </a>
-                                </div>
-                                <div class="blog-content">
-                                    <div class="meta-info">
-                                        <a class="date" href="javascript:void(0)"><i class="lni lni-timer"></i> Avatar
-                                        </a>
-                                        <a class="author" href="javascript:void(0)"><i class="lni lni-user"></i> <%=item.user_name%>
-                                        </a>
-                                        <a class="date" href="javascript:void(0)"><i class="lni lni-timer"></i> Hour_rate
-                                        </a>
-                                        <a class="date" href="javascript:void(0)"><i class="lni lni-timer"></i> Stars
-                                        </a>
+
+<section class="section blog-grid-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-12 col-12">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-12">
+            <!-- Start Single Blog Grid -->
+            <% @hrayfya.each do |item| %>
+            <div class="single-blog-grid">
+              <div class="blog-img">
+                <a href="blog-single.html">
+                  <img src="https://via.placeholder.com/150x75" alt="#">
+                </a>
+              </div>
+              <div class="blog-content">
+                <div class="meta-info">
+                  <a class="author" href="javascript:void(0)"><i class="lni lni-user"></i> <%=item.user_name%>
+                  </a>
+                  <a class="date" href="javascript:void(0)"><i class="lni lni-timer"></i> <%=item.hour_rate%> €/hour
+                  </a>
+                  <a class="date" href="javascript:void(0)"><i class="lni lni-timer"></i> Stars
+                  </a>
 
 
-                                    </div>
-                                    <div class="button">
-                                      <%= link_to destroy_user_session_path do %>
-                                  <a href="blog-single.html" class="btn">Read More</a>
-                                  <%end%>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Blog Grid -->
-                        </div>
-
-                    </div>
-                    <!-- Pagination -->
-                    <div class="pagination left">
-                        <ul class="pagination-list">
-                            <li><a href="javascript:void(0)">Prev</a></li>
-                            <li class="active"><a href="javascript:void(0)">2</a></li>
-                            <li><a href="javascript:void(0)">3</a></li>
-                            <li><a href="javascript:void(0)">4</a></li>
-                            <li><a href="javascript:void(0)">Next</a></li>
-                        </ul>
-                    </div>
-                    <!--/ End Pagination -->
                 </div>
-                <aside class="col-lg-4 col-md-12 col-12">
-                    <div class="sidebar">
-                        <!-- Start Single Widget -->
-                        <div class="widget search-widget">
-                            <h5 class="widget-title">Search This Site</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Search ...">
-                                <button type="submit"><i class="lni lni-search-alt"></i></button>
-                            </form>
-                        </div>
-                        <!-- End Single Widget -->
-                        <!-- Start Single Widget -->
+                <div class="button">
+                  <%= link_to details_path(id: item.id), method: :get, class:"btn" do %>
+                  Read More
+                  <%end%>
 
-                    </div>
-                </aside>
+                </div>
+              </div>
             </div>
+            <%end%>
+            <!-- End Single Blog Grid -->
+          </div>
+
         </div>
-    </section>
-    <%end%>
-    <!-- End Blog Grid Area -->
+        <!-- Pagination -->
+        <div class="pagination left">
+          <ul class="pagination-list">
+            <li><a href="javascript:void(0)">Prev</a></li>
+            <li class="active"><a href="javascript:void(0)">2</a></li>
+            <li><a href="javascript:void(0)">3</a></li>
+            <li><a href="javascript:void(0)">4</a></li>
+            <li><a href="javascript:void(0)">Next</a></li>
+          </ul>
+        </div>
+        <!--/ End Pagination -->
+      </div>
+      <aside class="col-lg-4 col-md-12 col-12">
+        <div class="sidebar">
+          <!-- Start Single Widget -->
+          <div class="widget search-widget">
+            <h5 class="widget-title">Search This Site</h5>
+            <form action="#">
+              <input type="text" placeholder="Search ...">
+              <button type="submit"><i class="lni lni-search-alt"></i></button>
+            </form>
+          </div>
+          <!-- End Single Widget -->
+          <!-- Start Single Widget -->
+
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- End Blog Grid Area -->

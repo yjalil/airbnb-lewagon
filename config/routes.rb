@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "/about", to: "pages#about"
   get "/contact", to: "pages#contact"
   get "/hrayfya", to: "pages#hrayfya"
-  get '/hrayfya(/:id)', to: 'jobs#details'
+  get '/hrayfya(/:id)', to: 'jobs#details', :as => :details
   get '/hrayfya(/:id/)new', to: 'jobs#new', :as => :make_reservation
   post '/hrayfya/create', to: 'jobs#create', :as => :validate_reservation
 end

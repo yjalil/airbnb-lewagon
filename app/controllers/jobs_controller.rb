@@ -1,6 +1,8 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
-  before_action :set_hrayfi, only: [:details]
+  before_action :set_hrayfi, only: [:create, :details]
+
+
   def index
     if params[:query].present?
       @query = params[:query]
@@ -18,8 +20,9 @@ class JobsController < ApplicationController
 
   def create
     @job = Job.new(job_params)
+    new_job_values
     if @job.save
-      redirect_to jobs_path
+      redirect_to dashboard_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -50,6 +53,10 @@ class JobsController < ApplicationController
 
   private
 
+  def calc_rate(start)
+    # logic
+  end
+
   def set_job
     @job = Job.find(params[:id])
   end
@@ -57,6 +64,11 @@ class JobsController < ApplicationController
   def set_hrayfi
     @hrayfi = User.find(params[:id])
   end
+
+  def new_job_values
+    @job.cost = ((@job.end_time - @job.start_time)/1.hour).round * @hrayfi.hour_rate
+  end
+
 
 
   def job_params

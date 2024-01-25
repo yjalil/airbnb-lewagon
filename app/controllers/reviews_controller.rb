@@ -9,13 +9,14 @@ class ReviewsController < ApplicationController
 
   def create
     @job = job.find(params[:job_id])
-    @review = @job.reviews.build(review_params.merge(:user current_user))
+    @review = @job.reviews.build(review_params.merge(user: current_user))
 
     if review.save?
-      flash [:success] = 'Review successfully created!'
+      flash[:success] = 'Review successfully created!'
       redirect_to job_path(@job)
     else
-      flash [:error] = 'Review creation failed.'
+      flash[:error] = 'Review creation failed.'
+
       render 'new'
     end
   end

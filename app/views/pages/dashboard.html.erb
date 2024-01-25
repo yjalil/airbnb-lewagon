@@ -38,17 +38,25 @@
             <p><%= item.description %></p>
             <%if item.reservation.status == "Pending"%>
             <div>
+              <form action="job/<%= item.id %>/accept" method="post">
+                <input type="submit" value="Accept for : <%= item.cost %>" class="btn button bg-success"/>
+              </form>
 
-              <%= link_to details_path(id: item.id), method: :get, class:"btn button bg-success" do %>
-              Accept for : <%= item.cost %>
-              <%end%>
-
-              <%= link_to details_path(id: item.id), method: :get, class:"btn button bg-danger" do %>
-              Refuse
-              <%end%>
+              <form action="job/<%= item.id %>/refuse" method="post">
+                <input type="submit" value="Refuse" class="btn button bg-danger"/>
+              </form>
 
             </div>
             <%end%>
+            <%if item.reservation.status == "Accepted"%>
+            <div>
+              <form action="job/<%= item.id %>/finish" method="post">
+                <input type="submit" value="Mark as Done!" class="btn button bg-primary"/>
+              </form>
+            </div>
+            <%end%>
+
+
           </div>
         </div>
         <% end %>

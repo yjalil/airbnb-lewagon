@@ -3,6 +3,7 @@ class JobsController < ApplicationController
   before_action :set_hrayfi, only: [ :details]
 
 
+
   def index
     if params[:query].present?
       @query = params[:query]
@@ -42,6 +43,28 @@ class JobsController < ApplicationController
     @jobs = Job.where(hrayfi_id: @hrayfi.id)
   end
 
+  def accept
+
+    @reservation = Reservation.where(job_id: params[:job_id]).first
+    @reservation.status = "Accepted"
+    @reservation.save!
+    redirect_to dashboard_path
+  end
+
+  def refuse
+    @reservation = Reservation.where(job_id: params[:job_id]).first
+    @reservation.status = "Refused"
+    @reservation.save!
+    redirect_to dashboard_path
+  end
+
+  def finish
+    @reservation = Reservation.where(job_id: params[:job_id]).first
+    @reservation.status = "Finished"
+    @reservation.save!
+    redirect_to dashboard_path
+  end
+
   def edit
   end
 
@@ -79,4 +102,5 @@ class JobsController < ApplicationController
   def job_params
     params.require(:job).permit(:title, :start_time, :end_time, :preview, :description, :hrayfi_id)
   end
+
 end

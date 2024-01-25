@@ -1,0 +1,44 @@
+<!-- Start Account Sign In Area -->
+<div class="account-login section">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
+				<%= simple_form_for @job, url: validate_reservation_path,  html: { class: "card login-form inner-content"}, method: :post do |f| %>
+				<% if @job.errors.any? %>
+				<ul>
+					<% @job.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+					<% end %>
+				</ul>
+				<% end %>
+				<div class="card-body">
+					<div class="title">
+						<h3>Book a job Now</h3>
+						<p>Fill the bokking details</p>
+					</div>
+					<div class="input-head">
+            <div class="form-group input-group">
+							<%= f.input :title, as: :string,  class:"form-control" %>
+						</div>
+
+						<div class="form-group input-group">
+							<%= f.input :start_time, as: :datetime, input_html: { data: { controller: "datepicker"}}, class: "form-control" %>
+						</div>
+						<div class="form-group input-group">
+							<%= f.input :end_time, as: :datetime, input_html: { data: { controller: "datepicker" }} , class:"form-control"   %>
+						</div>
+						<div class="form-group input-group">
+							<%= f.input :description, as: :text,  class:"form-control" %>
+						</div>
+            <div>
+							<%= f.input :hrayfi_id , :as => :hidden, :input_html => { :value => params[:id] } %>
+            </div>
+					</div>
+					<div class="button"><%= f.submit "Validate", class:"btn"  %></div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Account Sign In Area -->

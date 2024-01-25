@@ -1,5 +1,7 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
+  before_action :set_hrayfi, only: [ :details]
+
 
   def index
     if params[:query].present?
@@ -18,14 +20,26 @@ class JobsController < ApplicationController
 
   def create
     @job = Job.new(job_params)
-    if @job.save
-      redirect_to jobs_path
+    user = User.find(params[:job][:hrayfi_id])
+    new_job_values(user)
+    @job.hrayfi_id = params[:job][:hrayfi_id]
+    @reservation = Reservation.new
+    @reservation.status = "Pending"
+    @reservation.client_id = current_user.id
+    if @job.save!
+      @reservation.job_id = @job.id
+      @reservation.save!
+      redirect_to dashboard_path
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def show
+  end
+
+  def details
+    @jobs = Job.where(hrayfi_id: @hrayfi.id)
   end
 
   def edit
@@ -46,11 +60,23 @@ class JobsController < ApplicationController
 
   private
 
+  def calc_rate(start)
+    # logic
+  end
+
   def set_job
     @job = Job.find(params[:id])
   end
 
+  def set_hrayfi
+    @hrayfi = User.find(params[:id])
+  end
+
+  def new_job_values(hrayfi)
+    @job.cost = ((@job.end_time - @job.start_time)/1.hour).round * hrayfi.hour_rate
+  end
+
   def job_params
-    params.require(:job).permit(:title, :start_time, :end_time, :preview)
+    params.require(:job).permit(:title, :start_time, :end_time, :preview, :description, :hrayfi_id)
   end
 end

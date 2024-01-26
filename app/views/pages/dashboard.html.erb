@@ -2,27 +2,26 @@
 <% if @jobs %>
 <!-- Start Blog Section Area -->
 
-<section class="blog-section section">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="section-title">
-          <h3 class="wow zoomIn" data-wow-delay=".2s">Dashboard</h3>
-          <h2 class="wow fadeInUp" data-wow-delay=".4s">All my Jobs</h2>
-          <p class="wow fadeInUp" data-wow-delay=".6s"></p>
+  <section class="blog-section section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="section-title">
+            <h3 class="wow zoomIn" data-wow-delay=".2s">Dashboard</h3>
+            <h2 class="wow fadeInUp" data-wow-delay=".4s">All my Jobs</h2>
+            <p class="wow fadeInUp" data-wow-delay=".6s"></p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".4s">
 
+      <div class="d-flex  gap-3">
         <% @jobs.each do |item| %>
-
         <!-- Start Single Blog Grid -->
+
         <div class="single-blog-grid">
           <div class="blog-img">
             <a href="blog-single.html">
-              <img src="https://via.placeholder.com/500x310" alt="#">
+              <img class="img-fix" src="<%= item[:preview] %>" alt="#">
             </a>
           </div>
           <div class="blog-content">
@@ -60,14 +59,11 @@
           </div>
         </div>
         <% end %>
-        <!-- End Single Blog Grid -->
       </div>
-
+        <!-- End Single Blog Grid -->
     </div>
   </section>
   <!-- End Blog Section Area -->
-
-
 
   <% elsif @reservations %>
   <!-- Start Blog Section Area -->
@@ -83,8 +79,8 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-4 col-md-6 col-12 wow fadeInUp" data-wow-delay=".4s">
+
+      <div class="d-flex  gap-3">
 
           <% @reservations.each do |item| %>
 
@@ -92,7 +88,7 @@
           <div class="single-blog-grid">
             <div class="blog-img">
               <a href="blog-single.html">
-                <img src="https://via.placeholder.com/500x310" alt="#">
+                <img class="img-fix" src="<%= item.job.preview %>" alt="#">
               </a>
             </div>
             <div class="blog-content">
@@ -113,13 +109,11 @@
           </div>
           <% end %>
           <!-- End Single Blog Grid -->
-        </div>
-
       </div>
-    </section>
+
+
+    </div>
+  </section>
     <!-- End Blog Section Area -->
 
-
-
-    <% end %>
-  </div>
+<% end %>

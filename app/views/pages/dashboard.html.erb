@@ -39,7 +39,7 @@
               <img src="https://res.cloudinary.com/dtcw5vmqd/image/upload/v1706473592/pending_aju2sy.jpg" alt="Pending">
               <%elsif item.reservation.status == "Accepted"%>
               <img src="https://res.cloudinary.com/dtcw5vmqd/image/upload/v1706473593/accepted_bbnc7q.jpg" alt="Accepted">
-              <%elsif item.reservation.status == "Refused"%>
+              <%elsif item.reservation.status == "Rejected"%>
               <img src="https://res.cloudinary.com/dtcw5vmqd/image/upload/v1706473593/refused_osylmg.jpg" alt="Rejected">
 
               <% elsif  item.reservation.status == "Finished" %>
@@ -125,13 +125,30 @@
 
     <div class="d-flex  gap-3">
 
-      <% @reservations.each do |item| %>
+      <% @reservations.each_with_index do |item,  index| %>
 
       <!-- Start Single Blog Grid -->
+      <% if index%4 == 0 %>
+      <div class="row">
+        <%end%>
+
       <div class="single-blog-grid">
         <div class="blog-img">
-          <a href="blog-single.html">
-            <img class="img-fix" src="<%= item.job.preview %>" alt="#">
+          <a href="javascript:void(0)">
+            <%if item.status == "Pending"%>
+            <img src="https://res.cloudinary.com/dtcw5vmqd/image/upload/v1706473592/pending_aju2sy.jpg" alt="Pending">
+            <%elsif item.status == "Accepted"%>
+            <img src="https://res.cloudinary.com/dtcw5vmqd/image/upload/v1706473593/accepted_bbnc7q.jpg" alt="Accepted">
+            <%elsif item.status == "Rejected"%>
+            <img src="https://res.cloudinary.com/dtcw5vmqd/image/upload/v1706473593/refused_osylmg.jpg" alt="Rejected">
+
+            <% elsif  item.status == "Finished" %>
+            <img src="https://source.unsplash.com/800x1200/?embroidery,booking,creative" alt="Finished with preview">
+
+            <%else%>
+            <p>No preview photo available</p>
+            <% end %>
+
           </a>
         </div>
         <div class="blog-content">
@@ -149,14 +166,17 @@
             <a href="blog-single.html" class="btn">Booked for : <%= item.job.cost %></a>
           </div>
         </div>
-      </div>
-      <% end %>
+
+
+      <% if index % 4 == 0 %>
+    </div >
+    <%end%>
+    <% end %>
+    <% end %>
       <!-- End Single Blog Grid -->
     </div>
-
+  </div>
 
   </div>
 </section>
 <!-- End Blog Section Area -->
-
-<% end %>

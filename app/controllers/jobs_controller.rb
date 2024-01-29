@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :destroy]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :add_preview]
   before_action :set_hrayfi, only: [ :details]
 
 
@@ -68,6 +68,18 @@ class JobsController < ApplicationController
   def edit
   end
 
+  def edit_preview
+    @job = Job.find(params[:job_id])
+  end
+
+  def add_preview
+    @job = Job.find(params[:job_id])
+    @job.update(params.require(:job).permit(:preview))
+
+  end
+
+
+
   def update
     if @job.update(job_params)
       redirect_to job_path(@job)
@@ -82,10 +94,6 @@ class JobsController < ApplicationController
   end
 
   private
-
-  def calc_rate(start)
-    # logic
-  end
 
   def set_job
     @job = Job.find(params[:id])

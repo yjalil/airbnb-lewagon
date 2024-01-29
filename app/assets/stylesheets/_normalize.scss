@@ -898,7 +898,7 @@ ol {
     z-index: 2;
     text-align: left;
     background-color: $black;
-    background-image: url('../images/bread-bg/banner-bg.svg');
+    background-image: url("<%= asset_path('bread-bg/banner-bg.svg') %>");
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;

@@ -8,7 +8,7 @@ Author: GrayGrids
     console.log("file loaded");
 
     setTimeout(() => {
-      let preloader =document.querySelector(".preloader").outerHTML = ""
+      document.querySelector(".preloader").outerHTML = ""
     }, (1000));
 
     function fadeout() {

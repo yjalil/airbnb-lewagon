@@ -108,7 +108,7 @@ class JobsController < ApplicationController
   end
 
   def job_params
-    params.require(:job).permit(:title, :start_time, :end_time, :preview, :description, :hrayfi_id)
+    params.require(:job).permit(:title, :start_time, :end_time, :preview, :description, :hrayfi_id).select { |x, v| v.present? }
   end
 
 end

@@ -35,18 +35,17 @@ image_urls = [
   cost = ((end_time - start_time)/1.hour).round * hrayfi.hour_rate
 
   Job.create!(
-  title: Faker::Lorem.sentence(word_count: 3, supplemental: true, random_words_to_add: 4),
-  start_time: start_time,
-  end_time: end_time,
-  hrayfi_id: hrayfi.id,
-  description: Faker::Lorem.paragraph(sentence_count: 4),
-  cost: cost,
-  preview: image_urls.sample
-)
-Reservation.create!(
-  status: ["Pending","Accepted","Rejected","Finished"].sample,
-  job_id: Job.last.id,
-  client_id: User.where(role: "client").sample.id
-)
-
+    title: Faker::Lorem.sentence(word_count: 3, supplemental: true, random_words_to_add: 4),
+    start_time: start_time,
+    end_time: end_time,
+    hrayfi_id: hrayfi.id,
+    description: Faker::Lorem.paragraph(sentence_count: 4),
+    cost: cost,
+    # preview: image_urls.sample
+  )
+  Reservation.create!(
+    status: ["Pending","Accepted","Rejected","Finished"].sample,
+    job_id: Job.last.id,
+    client_id: User.where(role: "client").sample.id
+  )
 end

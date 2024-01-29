@@ -53,6 +53,8 @@ gem "devise"
 gem "faker"
 # Animations and CSS
 gem "animate-css-rails"
+#Image hosting
+gem "cloudinary"
 
 group :development, :test do
   gem "dotenv-rails"

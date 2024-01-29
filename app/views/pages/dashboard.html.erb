@@ -1,38 +1,67 @@
+ <!-- Start Breadcrumbs -->
+ <div class="breadcrumbs">
+  <div class="container">
+      <div class="row align-items-center">
+          <div class="col-lg-6 offset-lg-3 col-md-12 col-12">
+              <div class="breadcrumbs-content">
 
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- End Breadcrumbs -->
 <% if @jobs %>
 <!-- Start Blog Section Area -->
 
-  <section class="blog-section section">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="section-title">
-            <h3 class="wow zoomIn" data-wow-delay=".2s">Dashboard</h3>
-            <h2 class="wow fadeInUp" data-wow-delay=".4s">All my Jobs</h2>
-            <p class="wow fadeInUp" data-wow-delay=".6s"></p>
-          </div>
+<section class="blog-section section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title">
+          <h3 class="wow zoomIn" data-wow-delay=".2s">Dashboard</h3>
+          <h2 class="wow fadeInUp" data-wow-delay=".4s">All my Jobs</h2>
+          <p class="wow fadeInUp" data-wow-delay=".6s"></p>
         </div>
       </div>
+    </div>
 
-      <div class="d-flex  gap-3">
-        <% @jobs.each do |item| %>
-        <!-- Start Single Blog Grid -->
-
+    <div class="d-flex  gap-3">
+      <% @jobs.each_with_index do |item,  index| %>
+      <!-- Start Single Blog Grid -->
+      <% if index%4 == 0 %>
+      <div class="row">
+        <%end%>
         <div class="single-blog-grid">
           <div class="blog-img">
-            <a href="blog-single.html">
-              <img class="img-fix" src="<%= item[:preview] %>" alt="#">
+            <a href="javascript:void(0)">
+              <%if item.reservation.status == "Pending"%>
+              <img src="https://res.cloudinary.com/dtcw5vmqd/image/upload/v1706473592/pending_aju2sy.jpg" alt="Pending">
+              <%elsif item.reservation.status == "Accepted"%>
+              <img src="https://res.cloudinary.com/dtcw5vmqd/image/upload/v1706473593/accepted_bbnc7q.jpg" alt="Accepted">
+              <%elsif item.reservation.status == "Refused"%>
+              <img src="https://res.cloudinary.com/dtcw5vmqd/image/upload/v1706473593/refused_osylmg.jpg" alt="Rejected">
+
+              <% elsif  item.reservation.status == "Finished" %>
+              <img src="https://source.unsplash.com/800x1200/?embroidery,booking,creative" alt="Finished with preview">
+
+              <%else%>
+              <p>No preview photo available</p>
+              <% end %>
+
             </a>
           </div>
           <div class="blog-content">
             <div class="meta-info">
-              <a class="date" href="javascript:void(0)"><i class="lni lni-timer"></i> <%= item.start_time %>- <%= item.end_time %>
+              <a class="date" href="javascript:void(0)"><i class="lni lni-timer"></i> <%= item.start_time %>
+              </a>
+              <a class="date" href="javascript:void(0)"><i class="lni lni-timer"></i>  <%= item.end_time %>
               </a>
               <a class="author" href="javascript:void(0)"><i class="lni lni-user"></i> <%= item.reservation.client.user_name %>
               </a>
             </div>
             <h4>
-              <a href="blog-single.html"><%= item.title %></a>
+              <a href="javascript:void(0)"><%= item.title %></a>
             </h4>
             <p><%= item.description %></p>
             <%if item.reservation.status == "Pending"%>
@@ -54,66 +83,80 @@
               </form>
             </div>
             <%end%>
+            <%if item.reservation.status == "Finished"%>
+            <div>
+
+              <%= link_to edit_preview_path(job_id: item.id), method: :get, class:"btn btn-info" do %>
+              Add preview
+              <%end%>
+
+            </div>
+            <%end%>
 
 
+            <% if index % 4 == 0 %>
+    </div >
+    <%end%>
           </div>
-        </div>
+
         <% end %>
       </div>
-        <!-- End Single Blog Grid -->
+
+
+    <!-- End Single Blog Grid -->
+  </div>
+</section>
+<!-- End Blog Section Area -->
+
+<% elsif @reservations %>
+<!-- Start Blog Section Area -->
+
+<section class="blog-section section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title">
+          <h3 class="wow zoomIn" data-wow-delay=".2s">Dashboard</h3>
+          <h2 class="wow fadeInUp" data-wow-delay=".4s">All my Reservations</h2>
+          <p class="wow fadeInUp" data-wow-delay=".6s"></p>
+        </div>
+      </div>
     </div>
-  </section>
-  <!-- End Blog Section Area -->
 
-  <% elsif @reservations %>
-  <!-- Start Blog Section Area -->
+    <div class="d-flex  gap-3">
 
-  <section class="blog-section section">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="section-title">
-            <h3 class="wow zoomIn" data-wow-delay=".2s">Dashboard</h3>
-            <h2 class="wow fadeInUp" data-wow-delay=".4s">All my Reservations</h2>
-            <p class="wow fadeInUp" data-wow-delay=".6s"></p>
+      <% @reservations.each do |item| %>
+
+      <!-- Start Single Blog Grid -->
+      <div class="single-blog-grid">
+        <div class="blog-img">
+          <a href="blog-single.html">
+            <img class="img-fix" src="<%= item.job.preview %>" alt="#">
+          </a>
+        </div>
+        <div class="blog-content">
+          <div class="meta-info">
+            <a class="date" href="javascript:void(0)"><i class="lni lni-timer"></i> <%= item.job.start_time %>- <%= item.job.end_time %>
+            </a>
+            <a class="author" href="javascript:void(0)"><i class="lni lni-user"></i> <%= item.job.hrayfi.user_name %>
+            </a>
+          </div>
+          <h4>
+            <a href="blog-single.html"><%= item.job.title %></a>
+          </h4>
+          <p>Status : <%= item.status %></p>
+          <div class="button">
+            <a href="blog-single.html" class="btn">Booked for : <%= item.job.cost %></a>
           </div>
         </div>
       </div>
-
-      <div class="d-flex  gap-3">
-
-          <% @reservations.each do |item| %>
-
-          <!-- Start Single Blog Grid -->
-          <div class="single-blog-grid">
-            <div class="blog-img">
-              <a href="blog-single.html">
-                <img class="img-fix" src="<%= item.job.preview %>" alt="#">
-              </a>
-            </div>
-            <div class="blog-content">
-              <div class="meta-info">
-                <a class="date" href="javascript:void(0)"><i class="lni lni-timer"></i> <%= item.job.start_time %>- <%= item.job.end_time %>
-                </a>
-                <a class="author" href="javascript:void(0)"><i class="lni lni-user"></i> <%= item.job.hrayfi.user_name %>
-                </a>
-              </div>
-              <h4>
-                <a href="blog-single.html"><%= item.job.title %></a>
-              </h4>
-              <p>Status : <%= item.status %></p>
-              <div class="button">
-                <a href="blog-single.html" class="btn">Booked for : <%= item.job.cost %></a>
-              </div>
-            </div>
-          </div>
-          <% end %>
-          <!-- End Single Blog Grid -->
-      </div>
-
-
+      <% end %>
+      <!-- End Single Blog Grid -->
     </div>
-  </section>
-    <!-- End Blog Section Area -->
+
+
+  </div>
+</section>
+<!-- End Blog Section Area -->
 
 <% end %>

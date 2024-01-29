@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   get '/hrayfya(/:id/)new', to: 'jobs#new', :as => :make_reservation
   post '/hrayfya/create', to: 'jobs#create', :as => :validate_reservation
   post '/job/:job_id/accept', to: 'jobs#accept', :as => :accept
+
   post '/job/:job_id/refuse', to: 'jobs#refuse', :as => :refuse
   post '/job/:job_id/finish', to: 'jobs#finish', :as => :finish
-
+  get '/job/:job_id/preview', to: 'jobs#edit_preview', :as => :edit_preview
+  patch '/job/:job_id/preview', to: 'jobs#add_preview', :as => :add_preview
+  resources :jobs
 end
